@@ -1,182 +1,143 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>voidshop | I tuoi articoli void//</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    max-width: 900px;
-    margin: auto;
-    padding: 1rem;
-    background: #fff;
-    color: #000;
-  }
-  header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  header h1 {
-    font-weight: 900;
-    font-size: 2.5rem;
-  }
-  .product {
-    border: 1px solid #ccc;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-    background: #f9f9f9;
-  }
-  .product h2 {
-    margin-top: 0;
-  }
-  label {
-    display: block;
-    margin: 0.4rem 0 0.2rem 0;
-    font-weight: 600;
-  }
-  select, input[type=number] {
-    width: 100%;
-    padding: 0.3rem;
-    font-size: 1rem;
-    border-radius: 4px;
-    border: 1px solid #aaa;
-  }
-  #cart-total {
-    font-weight: 900;
-    font-size: 1.4rem;
-    text-align: right;
-    margin-top: 1rem;
-  }
-  #paypal-button-container {
-    margin-top: 1.5rem;
-    text-align: center;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>voidshop | I tuoi articoli void//</title>
+  <script src="https://www.paypal.com/sdk/js?client-id=AaBOuXFWcBGG3FEUSHcHLi_oMsbbfGn2r4I_yfShjiBs8-iL0z8SHAbyQDoJ4uJXDzvNYLNhYX3ivb-I&currency=EUR"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #000;
+      margin: 0; padding: 0;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-bottom: 1px solid #eee;
+    }
+    header h1 {
+      font-weight: 900;
+      font-size: 2.5rem;
+      margin-bottom: 0.25rem;
+    }
+    header p {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #444;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .product {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      background: #f9f9f9;
+    }
+    .product h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .product select, .product input {
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      width: 100%;
+      max-width: 300px;
+      font-size: 1rem;
+    }
+    .paypal-button-container {
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>voidshop</h1>
+    <p>I tuoi articoli <strong>void//</strong></p>
+  </header>
+  <main>
+    <section class="product">
+      <h2>VOID// Classic Cap</h2>
+      <select id="cap-color">
+        <option value="Black">Black</option>
+        <option value="Navy">Navy</option>
+        <option value="Cranberry">Cranberry</option>
+        <option value="Spruce">Spruce</option>
+        <option value="Dark Gray">Dark Gray</option>
+        <option value="Khakhi">Khakhi</option>
+        <option value="Stone">Stone</option>
+        <option value="Pink">Pink</option>
+        <option value="Light Blue">Light Blue</option>
+      </select>
+      <div id="paypal-cap" class="paypal-button-container"></div>
+    </section>
 
-<header>
-  <h1>voidshop</h1>
-  <p>I tuoi articoli <strong>void//</strong></p>
-</header>
+    <section class="product">
+      <h2>VOID// Glitch Pants</h2>
+      <select id="pants-size">
+        <option value="2XS">2XS</option><option value="XS">XS</option><option value="S">S</option>
+        <option value="M">M</option><option value="L">L</option><option value="XL">XL</option>
+        <option value="2XL">2XL</option><option value="3XL">3XL</option><option value="4XL">4XL</option>
+        <option value="5XL">5XL</option><option value="6XL">6XL</option>
+      </select>
+      <div id="paypal-pants" class="paypal-button-container"></div>
+    </section>
 
-<main>
+    <section class="product">
+      <h2>VOID// Shield Transparent Case (Black Text)</h2>
+      <select id="case-black-model">
+        <option value="iPhone 12">iPhone 12</option>
+        <option value="iPhone 13">iPhone 13</option>
+        <option value="iPhone 14">iPhone 14</option>
+        <option value="iPhone 15">iPhone 15</option>
+        <option value="iPhone 16 Pro Max">iPhone 16 Pro Max</option>
+      </select>
+      <div id="paypal-case-black" class="paypal-button-container"></div>
+    </section>
 
-  <div class="product" data-price="35.00" data-name="VOID// Classic Cap">
-    <h2>VOID// Classic Cap</h2>
-    <label>Colore</label>
-    <select class="color">
-      <option value="black">Black</option>
-      <option value="navy">Navy</option>
-      <option value="cranberry">Cranberry</option>
-      <option value="spruce">Spruce</option>
-      <option value="darkgray">Dark Gray</option>
-      <option value="khakhi">Khakhi</option>
-      <option value="stone">Stone</option>
-      <option value="pink">Pink</option>
-      <option value="lightblue">Light Blue</option>
-    </select>
+    <section class="product">
+      <h2>VOID// Shield Transparent Case (White Text)</h2>
+      <select id="case-white-model">
+        <option value="iPhone 12">iPhone 12</option>
+        <option value="iPhone 13">iPhone 13</option>
+        <option value="iPhone 14">iPhone 14</option>
+        <option value="iPhone 15">iPhone 15</option>
+        <option value="iPhone 16 Pro Max">iPhone 16 Pro Max</option>
+      </select>
+      <div id="paypal-case-white" class="paypal-button-container"></div>
+    </section>
+  </main>
 
-    <label>Quantità</label>
-    <input type="number" class="qty" min="0" max="10" value="0" />
-  </div>
-
-  <div class="product" data-price="50.00" data-name="VOID// Minimalist Backpack">
-    <h2>VOID// Minimalist Backpack</h2>
-    <label>Quantità</label>
-    <input type="number" class="qty" min="0" max="5" value="0" />
-  </div>
-
-  <div class="product" data-price="60.00" data-name="VOID// Glitch Pattern Pants">
-    <h2>VOID// Glitch Pattern Pants</h2>
-    <label>Taglia</label>
-    <select class="size">
-      <option value="2xs">2XS</option>
-      <option value="xs">XS</option>
-      <option value="s">S</option>
-      <option value="m">M</option>
-      <option value="l">L</option>
-      <option value="xl">XL</option>
-      <option value="2xl">2XL</option>
-      <option value="3xl">3XL</option>
-      <option value="4xl">4XL</option>
-      <option value="5xl">5XL</option>
-      <option value="6xl">6XL</option>
-    </select>
-
-    <label>Quantità</label>
-    <input type="number" class="qty" min="0" max="10" value="0" />
-  </div>
-
-  <div id="cart-total">Totale: €0.00</div>
-
-  <div id="paypal-button-container"></div>
-
-</main>
-
-<script src="https://www.paypal.com/sdk/js?client-id=AaBOuXFWcBGG3FEUSHcHLi_oMsbbfGn2r4I_yfShjiBs8-iL0z8SHAbyQDoJ4uJXDzvNYLNhYX3ivb-I&currency=EUR"></script>
-<script>
-  const products = document.querySelectorAll('.product');
-  const cartTotalEl = document.getElementById('cart-total');
-
-  function calcolaTotale() {
-    let totale = 0;
-    products.forEach(prod => {
-      const prezzo = parseFloat(prod.dataset.price);
-      const qtyInput = prod.querySelector('.qty');
-      const qty = qtyInput ? parseInt(qtyInput.value) : 0;
-      if(qty > 0) {
-        totale += prezzo * qty;
-      }
-    });
-    return totale.toFixed(2);
-  }
-
-  function aggiornaTotale() {
-    const totale = calcolaTotale();
-    cartTotalEl.textContent = `Totale: €${totale}`;
-  }
-
-  // Aggiorna totale ogni volta che cambia quantità o selezione
-  products.forEach(prod => {
-    const qtyInput = prod.querySelector('.qty');
-    const selects = prod.querySelectorAll('select');
-    if(qtyInput) qtyInput.addEventListener('input', aggiornaTotale);
-    selects.forEach(sel => sel.addEventListener('change', aggiornaTotale));
-  });
-
-  aggiornaTotale();
-
-  paypal.Buttons({
-    createOrder: function(data, actions) {
-      const totale = calcolaTotale();
-      if(totale === "0.00") {
-        alert("Per favore, seleziona almeno un prodotto prima di procedere al pagamento.");
-        return;
-      }
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: totale
-          },
-          description: "Ordine voidshop"
-        }],
-        application_context: {
-          shipping_preference: "GET_FROM_FILE"
+  <script>
+    function renderPayPalButton(containerId, itemName, price) {
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: price.toFixed(2)
+              },
+              description: itemName
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          alert("Pagamento completato per " + itemName + ". Ti contatteremo via email per i dettagli della spedizione.");
+          return actions.order.capture();
         }
-      });
-    },
-    onApprove: function(data, actions) {
-      return actions.order.capture().then(function(details) {
-        alert(`Pagamento completato da ${details.payer.name.given_name}. Grazie per il tuo ordine!`);
-        // Qui puoi aggiungere codice per inviare i dati dell’ordine via email o backend
-        location.reload();
-      });
+      }).render(containerId);
     }
-  }).render('#paypal-button-container');
-</script>
 
+    renderPayPalButton('#paypal-cap', 'VOID// Classic Cap', 35.00);
+    renderPayPalButton('#paypal-pants', 'VOID// Glitch Pants', 55.00);
+    renderPayPalButton('#paypal-case-black', 'VOID// Shield Case (Black Text)', 19.00);
+    renderPayPalButton('#paypal-case-white', 'VOID// Shield Case (White Text)', 19.00);
+  </script>
 </body>
 </html>
