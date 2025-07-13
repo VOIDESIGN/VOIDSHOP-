@@ -10,6 +10,9 @@
       background: #fff;
       color: #000;
       margin: 0; padding: 0;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
     header {
       text-align: center;
@@ -26,138 +29,253 @@
       font-weight: 600;
       color: #444;
     }
-    main {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-    }
     .product {
       border: 1px solid #ddd;
       border-radius: 8px;
-      overflow: hidden;
-      text-align: center;
-      background: #f9f9f9;
       padding: 1rem;
+      margin: 1rem 0;
+      background: #f9f9f9;
     }
     .product h2 {
-      font-size: 1.3rem;
-      margin: 0.75rem 0 0.25rem;
+      margin: 0 0 0.5rem 0;
       font-weight: 700;
     }
-    .product p {
-      color: #555;
-      font-size: 0.9rem;
-      margin: 0 0 0.5rem;
-    }
-    .price {
-      font-weight: 900;
-      font-size: 1.1rem;
-      margin-bottom: 0.75rem;
-    }
-    form {
-      margin-top: 3rem;
-      border-top: 1px solid #eee;
-      padding-top: 2rem;
-      max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    form label {
+    label {
       display: block;
-      margin: 1rem 0 0.3rem;
+      margin-top: 0.5rem;
       font-weight: 600;
     }
-    form input, form select, form textarea {
+    select, input[type=number] {
       width: 100%;
-      padding: 0.5rem;
+      padding: 0.3rem;
+      margin-top: 0.2rem;
       font-size: 1rem;
       border: 1px solid #ccc;
       border-radius: 4px;
-      box-sizing: border-box;
     }
-    form button {
+    #cart-total {
+      font-weight: 900;
+      font-size: 1.4rem;
+      margin-top: 1rem;
+      text-align: right;
+    }
+    #paypal-button-container {
       margin-top: 1.5rem;
-      width: 100%;
-      padding: 0.75rem;
-      background: #000;
-      color: #fff;
-      border: none;
-      font-size: 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: background-color 0.3s;
-    }
-    form button:hover {
-      background: #222;
-    }
-    footer {
       text-align: center;
-      margin: 4rem 0 2rem;
-      color: #888;
-      font-size: 0.85rem;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>voidshop</h1>
-    <p>I tuoi articoli <strong>void//</strong></p>
-  </header>
+<header>
+  <h1>voidshop</h1>
+  <p>I tuoi articoli <strong>void//</strong></p>
+</header>
 
-  <main>
-    <section class="products">
-      <div class="product"><h2>VOID// Classic Cap</h2><p>Base in cotone, disponibile in vari colori. Logo ricamato bianco o nero.</p><div class="price">€ 35,00</div></div>
-      <div class="product"><h2>VOID// Drift Tee</h2><p>T-shirt unisex in cotone. Colori: nero, marrone, navy, arancione. Taglie: S-3XL.</p><div class="price">€ 30,00</div></div>
-      <div class="product"><h2>VOID// Spectra Bag</h2><p>Crossbody bag unisex minimal. Unica versione disponibile.</p><div class="price">€ 32,00</div></div>
-      <div class="product"><h2>VOID// Frame Cover (scritta nera)</h2><p>Cover trasparente con scritta nera. iPhone 12 → 16 Pro Max.</p><div class="price">€ 20,00</div></div>
-      <div class="product"><h2>VOID// Frame Cover (scritta bianca)</h2><p>Cover trasparente con scritta bianca. iPhone 12 → 16 Pro Max.</p><div class="price">€ 20,00</div></div>
-      <div class="product"><h2>VOID// Mirage Backpack</h2><p>Zaino minimalista. Unico modello disponibile.</p><div class="price">€ 55,00</div></div>
-      <div class="product"><h2>VOID// Glitch Pants</h2><p>Pantaloni con motivo glitch. Taglie 2XS → 6XL.</p><div class="price">€ 45,00</div></div>
-    </section>
+<main>
+  <div class="product" data-price="35.00" data-name="VOID// Classic Cap">
+    <h2>VOID// Classic Cap</h2>
+    <label for="color-cap">Colore</label>
+    <select id="color-cap">
+      <option value="black">Black</option>
+      <option value="navy">Navy</option>
+      <option value="cranberry">Cranberry</option>
+      <option value="spruce">Spruce</option>
+      <option value="darkgray">Dark Gray</option>
+      <option value="khakhi">Khakhi</option>
+      <option value="stone">Stone</option>
+      <option value="pink">Pink</option>
+      <option value="lightblue">Light Blue</option>
+    </select>
 
-    <form action="https://formspree.io/f/mdkdnzny" method="POST">
-      <h2>Ordina ora</h2>
-      <label for="nome">Nome e Cognome*</label>
-      <input type="text" id="nome" name="nome" required />
-      <label for="email">Email*</label>
-      <input type="email" id="email" name="email" required />
-      <label for="indirizzo">Indirizzo di Spedizione*</label>
-      <textarea id="indirizzo" name="indirizzo" rows="3" required></textarea>
-      <label for="prodotto">Articolo*</label>
-      <select id="prodotto" name="articolo" required>
-        <option value="">-- Seleziona un prodotto --</option>
-        <option value="classic_cap_bianca">VOID// Classic Cap (scritta bianca)</option>
-        <option value="classic_cap_nera">VOID// Classic Cap (scritta nera)</option>
-        <option value="drift_tee">VOID// Drift Tee</option>
-        <option value="spectra_bag">VOID// Spectra Bag</option>
-        <option value="frame_cover_nera">VOID// Frame Cover (scritta nera)</option>
-        <option value="frame_cover_bianca">VOID// Frame Cover (scritta bianca)</option>
-        <option value="mirage_backpack">VOID// Mirage Backpack</option>
-        <option value="glitch_pants">VOID// Glitch Pants</option>
-      </select>
-      <label for="taglia">Taglia</label>
-      <input type="text" id="taglia" name="taglia" placeholder="Es: M, 3XL, 16 Pro Max..." />
-      <label for="colore">Colore</label>
-      <input type="text" id="colore" name="colore" placeholder="Es: nero, navy, pink..." />
-      <label for="quantita">Quantità*</label>
-      <input type="number" id="quantita" name="quantita" min="1" max="10" value="1" required />
-      <label for="note">Note o richieste</label>
-      <textarea id="note" name="note" rows="2"></textarea>
-      <label><input type="checkbox" name="privacy" required /> Autorizzo il trattamento dei dati per finalità d'acquisto.</label>
-      <button type="submit">Invia Ordine</button>
-    </form>
-  </main>
+    <label for="qty-cap">Quantità</label>
+    <input type="number" id="qty-cap" min="1" max="10" value="1" />
+  </div>
 
-  <footer>
-    © voidshop 2025 – Tutti i diritti riservati
-  </footer>
+  <div class="product" data-price="30.00" data-name="VOID// White Text Cap">
+    <h2>VOID// White Text Cap</h2>
+    <label for="color-white-cap">Colore</label>
+    <select id="color-white-cap">
+      <option value="black">Black</option>
+      <option value="navy">Navy</option>
+      <option value="cranberry">Cranberry</option>
+      <option value="spruce">Spruce</option>
+      <option value="darkgray">Dark Gray</option>
+      <option value="khakhi">Khakhi</option>
+      <option value="stone">Stone</option>
+      <option value="pink">Pink</option>
+      <option value="lightblue">Light Blue</option>
+    </select>
+    <label for="qty-white-cap">Quantità</label>
+    <input type="number" id="qty-white-cap" min="1" max="10" value="0" />
+  </div>
+
+  <div class="product" data-price="28.00" data-name="VOID// Black Text Cap">
+    <h2>VOID// Black Text Cap</h2>
+    <label for="color-black-cap">Colore</label>
+    <select id="color-black-cap">
+      <option value="cranberry">Cranberry</option>
+      <option value="khakhi">Khakhi</option>
+      <option value="stone">Stone</option>
+      <option value="pink">Pink</option>
+      <option value="lightblue">Light Blue</option>
+      <option value="white">White</option>
+    </select>
+    <label for="qty-black-cap">Quantità</label>
+    <input type="number" id="qty-black-cap" min="1" max="10" value="0" />
+  </div>
+
+  <div class="product" data-price="50.00" data-name="VOID// Minimalist Backpack">
+    <h2>VOID// Minimalist Backpack</h2>
+    <label for="qty-backpack">Quantità</label>
+    <input type="number" id="qty-backpack" min="1" max="5" value="0" />
+  </div>
+
+  <div class="product" data-price="18.00" data-name="VOID// Clear Black Text Cover">
+    <h2>VOID// Clear Black Text Cover</h2>
+    <label for="model-black-cover">Modello iPhone</label>
+    <select id="model-black-cover">
+      <option value="iphone12">iPhone 12</option>
+      <option value="iphone13">iPhone 13</option>
+      <option value="iphone14">iPhone 14</option>
+      <option value="iphone15">iPhone 15</option>
+      <option value="iphone16promax">iPhone 16 Pro Max</option>
+    </select>
+    <label for="qty-black-cover">Quantità</label>
+    <input type="number" id="qty-black-cover" min="1" max="10" value="0" />
+  </div>
+
+  <div class="product" data-price="18.00" data-name="VOID// Clear White Text Cover">
+    <h2>VOID// Clear White Text Cover</h2>
+    <label for="model-white-cover">Modello iPhone</label>
+    <select id="model-white-cover">
+      <option value="iphone12">iPhone 12</option>
+      <option value="iphone13">iPhone 13</option>
+      <option value="iphone14">iPhone 14</option>
+      <option value="iphone15">iPhone 15</option>
+      <option value="iphone16promax">iPhone 16 Pro Max</option>
+    </select>
+    <label for="qty-white-cover">Quantità</label>
+    <input type="number" id="qty-white-cover" min="1" max="10" value="0" />
+  </div>
+
+  <div class="product" data-price="60.00" data-name="VOID// Glitch Pattern Pants">
+    <h2>VOID// Glitch Pattern Pants</h2>
+    <label for="size-pants">Taglia</label>
+    <select id="size-pants">
+      <option value="2xs">2XS</option>
+      <option value="xs">XS</option>
+      <option value="s">S</option>
+      <option value="m">M</option>
+      <option value="l">L</option>
+      <option value="xl">XL</option>
+      <option value="2xl">2XL</option>
+      <option value="3xl">3XL</option>
+      <option value="4xl">4XL</option>
+      <option value="5xl">5XL</option>
+      <option value="6xl">6XL</option>
+    </select>
+    <label for="qty-pants">Quantità</label>
+    <input type="number" id="qty-pants" min="1" max="10" value="0" />
+  </div>
+
+  <div class="product" data-price="40.00" data-name="VOID// Unisex Crossbody Bag">
+    <h2>VOID// Unisex Crossbody Bag</h2>
+    <label for="qty-crossbody">Quantità</label>
+    <input type="number" id="qty-crossbody" min="1" max="10" value="0" />
+  </div>
+
+  <div class="product" data-price="25.00" data-name="VOID// Casual T-Shirt">
+    <h2>VOID// Casual T-Shirt</h2>
+    <label for="size-tshirt">Taglia</label>
+    <select id="size-tshirt">
+      <option value="s">S</option>
+      <option value="m">M</option>
+      <option value="l">L</option>
+      <option value="xl">XL</option>
+      <option value="2xl">2XL</option>
+      <option value="3xl">3XL</option>
+    </select>
+    <label for="color-tshirt">Colore</label>
+    <select id="color-tshirt">
+      <option value="marrone">Marrone</option>
+      <option value="nero">Nero</option>
+      <option value="navy">Navy</option>
+      <option value="arancione">Arancione</option>
+    </select>
+    <label for="qty-tshirt">Quantità</label>
+    <input type="number" id="qty-tshirt" min="1" max="10" value="0" />
+  </div>
+
+  <div id="cart-total">Totale: €0.00</div>
+
+  <div id="paypal-button-container"></div>
+</main>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AaBOuXFWcBGG3FEUSHcHLi_oMsbbfGn2r4I_yfShjiBs8-iL0z8SHAbyQDoJ4uJXDzvNYLNhYX3ivb-I&currency=EUR"></script>
+
+<script>
+  // Funzione per calcolare totale carrello
+  function calcolaTotale() {
+    let totale = 0;
+    const prodotti = document.querySelectorAll('.product');
+    prodotti.forEach(prod => {
+      const prezzo = parseFloat(prod.dataset.price);
+      const nome = prod.dataset.name;
+      let qty = 0;
+      // Prendo quantità in base a ogni input all’interno del prodotto
+      const inputs = prod.querySelectorAll('input[type=number]');
+      inputs.forEach(i => {
+        qty += parseInt(i.value) || 0;
+      });
+      totale += prezzo * qty;
+    });
+    return totale.toFixed(2);
+  }
+
+  // Aggiorna il totale e il bottone paypal
+  function aggiornaTotale() {
+    const totale = calcolaTotale();
+    document.getElementById('cart-total').textContent = 'Totale: €' + totale;
+  }
+
+  // Rende il bottone PayPal con prezzo dinamico e ordina l’oggetto
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      const totale = calcolaTotale();
+      if (totale <= 0) {
+        alert("Seleziona almeno un prodotto prima di pagare!");
+        return;
+      }
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: totale
+          },
+          description: "Ordine voidshop"
+        }],
+        application_context: {
+          shipping_preference: 'GET_FROM_FILE' // chiede indirizzo spedizione
+        }
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        alert('Pagamento completato da ' + details.payer.name.given_name + '. Grazie per il tuo ordine!');
+        // Qui puoi aggiungere codice per mandare ordine al tuo backend o via email
+        location.reload(); // ricarica pagina dopo acquisto
+      });
+    }
+  }).render('#paypal-button-container');
+
+  // Aggiungi event listener su tutti gli input quantità e select
+  document.querySelectorAll('input[type=number], select').forEach(el => {
+    el.addEventListener('change', aggiornaTotale);
+  });
+
+  // Calcola il totale inizialmente
+  aggiornaTotale();
+</script>
 
 </body>
 </html>
