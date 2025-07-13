@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VOIDSHOP</title>
+<script src="https://www.paypal.com/sdk/js?client-id=AaBOuXFWcBGG3FEUSHcHLi_oMsbbfGn2r4I_yfShjiBs8-iL0z8SHAbyQDoJ4uJXDzvNYLNhYX3ivb-I&currency=EUR"></script>
+<style>
+  body {
+    font-family: Arial, sans-serif; background: #fff; color: #000; margin: 0; padding: 0;
+  }
+  header {
+    text-align: center; padding: 2rem 1rem; border-bottom: 1px solid #eee;
+  }
+  header h1 {
+    font-weight: 900; font-size: 2.5rem; margin-bottom: 0.25rem; letter-spacing: 3px;
+  }
+  main {
+    max-width: 900px; margin: 2rem auto; padding: 0 1rem;
+  }
+  .product {
+    border: 1px solid #ccc; border-radius: 8px; margin-bottom: 2rem; padding: 1rem;
+  }
+  .product h2 {
+    margin-bottom: 0.5rem;
+  }
+  label {
+    display: inline-block; width: 60px;
+  }
+  select, input[type=text], input[type=email], input[type=tel] {
+    margin-bottom: 0.7rem;
+    padding: 5px;
+    width: calc(100% - 70px);
+    max-width: 250px;
+  }
+  .paypal-button-container {
+    margin-top: 10px;
+  }
+  form {
+    margin-top: 1rem; border-top: 1px solid #ddd; padding-top: 1rem;
+  }
+  button.submit-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-weight: 700;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>VOIDSHOP</h1>
+  <p>Acquista i nostri prodotti</p>
+</header>
+
+<main>
+  <!-- Prodotto: T-Shirt -->
+  <div class="product" id="product-tshirt">
+    <h2>VOID// Summer Tee</h2>
+    <p>T-Shirt 100% cotone, colori disponibili: Marrone, Nero, Navy, Arancione.</p>
+    <label for="tshirt-taglia">Taglia:</label>
+    <select id="tshirt-taglia" aria-label="Taglia T-shirt">
+      <option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option>
+    </select><br />
+    <label for="tshirt-colore">Colore:</label>
+    <select id="tshirt-colore" aria-label="Colore T-shirt">
+      <option>Marrone</option><option>Nero</option><option>Navy</option><option>Arancione</option>
+    </select>
+    <div id="paypal-tshirt" class="paypal-button-container"></div>
+  </div>
+
+  <!-- Prodotto: Cappello scritta bianca -->
+  <div class="product" id="product-cap-white">
+    <h2>VOID// SignalCap (scritta bianca)</h2>
+    <p>Cappello con scritta bianca. Colori disponibili: Black, Navy, Cranberry, Spruce, Dark Gray, Khakhi, Stone, Pink, Light Blue.</p>
+    <label for="cap-white-colore">Colore:</label>
+    <select id="cap-white-colore" aria-label="Colore cappello scritta bianca">
+      <option>Black</option><option>Navy</option><option>Cranberry</option><option>Spruce</option><option>Dark Gray</option><option>Khakhi</option><option>Stone</option><option>Pink</option><option>Light Blue</option>
+    </select>
+    <div id="paypal-cap-white" class="paypal-button-container"></div>
+  </div>
+
+  <!-- Prodotto: Cappello scritta nera -->
+  <div class="product" id="product-cap-black">
+    <h2>VOID// SignalCap (scritta nera)</h2>
+    <p>Cappello con scritta nera. Colori disponibili: Cranberry, Khakhi, Stone, Pink, Light Blue, White.</p>
+    <label for="cap-black-colore">Colore:</label>
+    <select id="cap-black-colore" aria-label="Colore cappello scritta nera">
+      <option>Cranberry</option><option>Khakhi</option><option>Stone</option><option>Pink</option><option>Light Blue</option><option>White</option>
+    </select>
+    <div id="paypal-cap-black" class="paypal-button-container"></div>
+  </div>
+
+  <!-- Prodotto: Zaino minimalista -->
+  <div class="product" id="product-zaino">
+    <h2>VOID// MinimalPack</h2>
+    <p>Zaino minimalista nero, design compatto e resistente.</p>
+    <div id="paypal-zaino" class="paypal-button-container"></div>
+  </div>
+
+  <!-- Prodotto: Cover trasparente con scritta nera -->
+  <div class="product" id="product-cover-black">
+    <h2>VOID// ClearCase BlackText</h2>
+    <p>Cover trasparente con scritta nera per iPhone 12 - 16 Pro Max.</p>
+    <label for="cover-black-model">Modello iPhone:</label>
+    <select id="cover-black-model" aria-label="Modello iPhone cover nera">
+      <option>iPhone 12</option><option>iPhone 12 Pro</option><option>iPhone 12 Pro Max</option>
+      <option>iPhone 13</option><option>iPhone 13 Pro</option><option>iPhone 13 Pro Max</option>
+      <option>iPhone 14</option><option>iPhone 14 Pro</option><option>iPhone 14 Pro Max</option>
+      <option>iPhone 15</option><option>iPhone 15 Pro</option><option>iPhone 15 Pro Max</option>
+      <option>iPhone 16</option><option>iPhone 16 Pro</option><option>iPhone 16 Pro Max</option>
+    </select>
+    <div id="paypal-cover-black" class="paypal-button-container"></div>
+  </div>
+
+  <!-- Prodotto: Cover trasparente con scritta bianca -->
+  <div class="product" id="product-cover-white">
+    <h2>VOID// ClearCase WhiteText</h2>
+    <p>Cover trasparente con scritta bianca per iPhone 12 - 16 Pro Max.</p>
+    <label for="cover-white-model">Modello iPhone:</label>
+    <select id="cover-white-model" aria-label="Modello iPhone cover bianca">
+      <option>iPhone 12</option><option>iPhone 12 Pro</option><option>iPhone 12 Pro Max</option>
+      <option>iPhone 13</option><option>iPhone 13 Pro</option><option>iPhone 13 Pro Max</option>
+      <option>iPhone 14</option><option>iPhone 14 Pro</option><option>iPhone 14 Pro Max</option>
+      <option>iPhone 15</option><option>iPhone 15 Pro</option><option>iPhone 15 Pro Max</option>
+      <option>iPhone 16</option><option>iPhone 16 Pro</option><option>iPhone 16 Pro Max</option>
+    </select>
+    <div id="paypal-cover-white" class="paypal-button-container"></div>
+  </div>
+
+  <!-- Prodotto: Pantaloni glitch -->
+  <div class="product" id="product-pantaloni">
+    <h2>VOID// GlitchPants</h2>
+    <p>Pantaloni con motivo glitch.</p>
+    <label for="pantaloni-taglia">Taglia:</label>
+    <select id="pantaloni-taglia" aria-label="Taglia pantaloni">
+      <option>2XS</option><option>XS</option><option>S</option><option>M</option>
+      <option>L</option><option>XL</option><option>2XL</option><option>3XL</option>
+      <option>4XL</option><option>5XL</option><option>6XL</option>
+    </select>
+    <div id="paypal-pantaloni" class="paypal-button-container"></div>
+  </div>
+
+  <!-- Prodotto: Crossbody bag unisex -->
+  <div class="product" id="product-crossbody">
+    <h2>VOID// SlingMate</h2>
+    <p>Crossbody bag unisex, versatile e minimalista.</p>
+    <div id="paypal-crossbody" class="paypal-button-container"></div>
+  </div>
+
+  <!-- FORM FORMSPREE per i dati cliente + ordine -->
+  <section>
+    <h2>Invia i tuoi dati dopo l'acquisto</h2>
+    <form id="order-form" method="POST" action="https://formspree.io/f/mdkdnzny">
+      <label for="nome">Nome completo:</label><br />
+      <input type="text" id="nome" name="Nome" required /><br />
+
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" name="Email" required /><br />
+
+      <label for="telefono">Telefono:</label><br />
+      <input type="tel" id="telefono" name="Telefono" /><br />
+
+      <label for="ordine">Prodotto ordinato:</label><br />
+      <select id="ordine" name="Ordine" required>
+        <option value="">-- Seleziona un prodotto --</option>
+        <option value="VOID// Summer Tee">VOID// Summer Tee (T-shirt)</option>
+        <option value="VOID// SignalCap Bianca">VOID// SignalCap (scritta bianca)</option>
+        <option value="VOID// SignalCap Nera">VOID// SignalCap (scritta nera)</option>
+        <option value="VOID// MinimalPack">VOID// MinimalPack (zaino)</option>
+        <option value="VOID// ClearCase BlackText">VOID// ClearCase BlackText (cover nera)</option>
+        <option value="VOID// ClearCase WhiteText">VOID// ClearCase WhiteText (cover bianca)</option>
+        <option value="VOID// GlitchPants">VOID// GlitchPants (pantaloni)</option>
+        <option value="VOID// SlingMate">VOID// SlingMate (crossbody bag)</option>
+      </select><br />
+
+      <label for="note">Note (taglia, colore, modello, etc.):</label><br />
+      <input type="text" id="note" name="Note" placeholder="Es. Taglia M, colore nero" /><br />
+
+      <button class="submit-btn" type="submit">Invia dati ordine</button>
+    </form>
+  </section>
+</main>
+
+<script>
+  // Prezzo fisso 1 euro
+  const prezzo = "1.00";
+
+  // Funzione helper per creare PayPal button
+  function creaPayPalButton(containerId, prodottoNome, opzioniSelector = null) {
+    paypal.Buttons({
+      style: {
+        shape: 'rect',
+        color: 'black',
+        layout: 'vertical',
+        label: 'paypal',
+      },
+      createOrder: function(data, actions) {
+        let description = prodottoNome;
+        // Se ci sono opzioni, aggiungile alla descrizione ordine
+        if (opzioniSelector) {
+          const opzioniEl = document.querySelectorAll(opzioniSelector);
+          opzioniEl.forEach(sel => {
+            description += ` - ${sel.value}`;
+          });
+        }
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: prezzo
+            },
+            description: description
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          alert('Pagamento completato da ' + details.payer.name.given_name + '. Grazie per il tuo acquisto di ' + prodottoNome + '!');
+        });
+      },
+      onError: function(err) {
+        alert('Errore durante il pagamento: ' + err);
+      }
+    }).render('#' + containerId);
+  }
+
+  // Creo i bottoni PayPal con opzioni se presenti
+  creaPayPalButton('paypal-tshirt', 'VOID// Summer Tee', '#tshirt-taglia, #tshirt-colore');
+  creaPayPalButton('paypal-cap-white', 'VOID// SignalCap (scritta bianca)', '#cap-white-colore');
+  creaPayPalButton('paypal-cap-black', 'VOID// SignalCap (scritta nera)', '#cap-black-colore');
+  creaPayPalButton('paypal-zaino', 'VOID// MinimalPack');
+  creaPayPalButton('paypal-cover-black', 'VOID// ClearCase BlackText', '#cover-black-model');
+  creaPayPalButton('paypal-cover-white', 'VOID// ClearCase WhiteText', '#cover-white-model');
+  creaPayPalButton('paypal-pantaloni', 'VOID// GlitchPants', '#pantaloni-taglia');
+  creaPayPalButton('paypal-crossbody', 'VOID// SlingMate');
+
+</script>
+
+</body>
+</html>
