@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VOIDSHOP</title>
+  <script src="https://www.paypal.com/sdk/js?client-id=AaBOuXFWcBGG3FEUSHcHLi_oMsbbfGn2r4I_yfShjiBs8-iL0z8SHAbyQDoJ4uJXDzvNYLNhYX3ivb-I&currency=EUR&disable-funding=card,credit,sofort,sepa,mybank,wallet" defer></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #fff;
+      color: #000;
+      margin: 0; padding: 0;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-bottom: 1px solid #eee;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    header p {
+      margin-top: 0.5rem;
+      color: #555;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .product {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      background-color: #fafafa;
+    }
+    .product h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.4rem;
+    }
+    .price {
+      font-weight: bold;
+      margin-bottom: 0.75rem;
+      color: #222;
+    }
+    label {
+      display: block;
+      margin-top: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+    input, select, button {
+      padding: 0.5rem;
+      margin-bottom: 0.75rem;
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .paypal-button-container {
+      margin-top: 1rem;
+    }
+    @media screen and (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      .product {
+        padding: 1rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>VOIDSHOP</h1>
+    <p>Product Preview & Purchase</p>
+  </header>
+
+  <main id="product-list">
+  </main>
+
+  <script>
+    const formspreeURL = 'https://formspree.io/f/mdkdnzny';
+
+    const products = [
+      {
+        id: 'summerbag',
+        name: 'VOID// SummerBag',
+        desc: 'White fabric pochette, perfect for summer.',
+        price: '1.00',
+        sizes: null,
+        colors: null
+      },
+      {
+        id: 'minimalpack',
+        name: 'VOID// MinimalPack',
+        desc: 'Minimalist black backpack, compact and durable design.',
+        price: '1.00',
+        sizes: null,
+        colors: null
+      },
+      {
+        id: 'cap-blackprint',
+        name: 'VOID// Cap (black print)',
+        desc: 'Black cap with white VOID// embroidery.',
+        price: '1.00',
+        sizes: ['One Size'],
+        colors: ['black', 'navy', 'cranberry', 'spruce', 'dark gray', 'khaki', 'stone', 'pink', 'light blue']
+      },
+      {
+        id: 'cap-whiteprint',
+        name: 'VOID// Cap (white print)',
+        desc: 'Cap with black VOID// embroidery.',
+        price: '1.00',
+        sizes: ['One Size'],
+        colors: ['cranberry', 'khaki', 'stone', 'pink', 'light blue', 'white']
+      },
+      {
+        id: 'tshirt',
+        name: 'VOID// Tee',
+        desc: 'T-shirt with central VOID// print.',
+        price: '1.00',
+        sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+        colors: ['maroon', 'black', 'navy', 'orange']
+      },
+      {
+        id: 'glitch-pants',
+        name: 'VOID// Glitch Pants',
+        desc: 'Pants with glitch theme, available in one color.',
+        price: '1.00',
+        sizes: ['2XS', 'XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL', '6XL'],
+        colors: ['glitch']
+      },
+      {
+        id: 'cover-whiteprint',
+        name: 'VOID// Cover (white print)',
+        desc: 'White cover with black VOID// print. Compatible with iPhone models.',
+        price: '1.00',
+        sizes: null,
+        colors: null
+      },
+      {
+        id: 'cover-blackprint',
+        name: 'VOID// Cover (black print)',
+        desc: 'Black cover with white VOID// print. Compatible with iPhone models.',
+        price: '1.00',
+        sizes: null,
+        colors: null
+      }
+    ];
+
+    function createProductHTML(product) {
+      let sizeSelector = '';
+      if (product.sizes) {
+        sizeSelector = `
+          <label for="size-${product.id}">Size</label>
+          <select id="size-${product.id}" name="size" required>
+            <option value="" disabled selected>Select size</option>
+            ${product.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+          </select>
+        `;
+      }
+      let colorSelector = '';
+      if (product.colors && !(product.colors.length === 1 && product.colors[0] === 'glitch')) {
+        colorSelector = `
+          <label for="color-${product.id}">Color</label>
+          <select id="color-${product.id}" name="color" required>
+            <option value="" disabled selected>Select color</option>
+            ${product.colors.map(c => `<option value="${c}">${capitalize(c)}</option>`).join('')}
+          </select>
+        `;
+      }
+
+      // iPhone model selector only for covers
+      let iphoneModelSelector = '';
+      if (product.id === 'cover-whiteprint' || product.id === 'cover-blackprint') {
+        const iphoneModels = [
+          'iPhone 12', 'iPhone 12 Pro', 'iPhone 12 Pro Max',
+          'iPhone 13', 'iPhone 13 Pro', 'iPhone 13 Pro Max',
+          'iPhone 14', 'iPhone 14 Pro', 'iPhone 14 Pro Max',
+          'iPhone 15', 'iPhone 15 Pro', 'iPhone 15 Pro Max',
+          'iPhone 16', 'iPhone 16 Pro', 'iPhone 16 Pro Max'
+        ];
+        iphoneModelSelector = `
+          <label for="iphonemodel-${product.id}">iPhone Model</label>
+          <select id="iphonemodel-${product.id}" name="iphoneModel" required>
+            <option value="" disabled selected>Select iPhone model</option>
+            ${iphoneModels.map(m => `<option value="${m}">${m}</option>`).join('')}
+          </select>
+        `;
+      }
+
+      return `
+        <div class="product">
+          <h2>${product.name}</h2>
+          <div class="price">Price: €${product.price}</div>
+          <p>${product.desc}</p>
+
+          <form id="form-${product.id}">
+            <label for="name-${product.id}">Name</label>
+            <input type="text" id="name-${product.id}" name="name" required />
+
+            <label for="email-${product.id}">Email</label>
+            <input type="email" id="email-${product.id}" name="email" required />
+
+            <label for="address-${product.id}">Street Address</label>
+            <input type="text" id="address-${product.id}" name="address" required />
+
+            <label for="city-${product.id}">City</label>
+            <input type="text" id="city-${product.id}" name="city" required />
+
+            <label for="postal-${product.id}">Postal Code</label>
+            <input type="text" id="postal-${product.id}" name="postal" required />
+
+            <label for="country-${product.id}">Country</label>
+            <input type="text" id="country-${product.id}" name="country" required />
+
+            ${sizeSelector}
+            ${colorSelector}
+            ${iphoneModelSelector}
+
+            <button type="submit">Confirm Details</button>
+          </form>
+
+          <div class="paypal-button-container" id="paypal-${product.id}" style="display:none;"></div>
+        </div>
+      `;
+    }
+
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    function sendOrderData(productName, data) {
+      const formData = new FormData();
+      formData.append('product', productName);
+      for (const key in data) {
+        if(data[key]) formData.append(key, data[key]);
+      }
+      return fetch(formspreeURL, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+    }
+
+    function renderPayPalButton(containerId, product, buyerData) {
+      paypal.Buttons({
+        fundingSource: paypal.FUNDING.PAYPAL,
+        style: { layout: 'vertical', color: 'black', shape: 'rect', label: 'buynow' },
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: { value: product.price },
+              description: `${product.name} - ${buyerData.name}`
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            sendOrderData(product.name, buyerData);
+            alert(`Payment completed for ${product.name}!`);
+          });
+        },
+        onError: function(err) {
+          alert('Payment could not be processed. Please try again.');
+          console.error(err);
+        }
+      }).render(containerId);
+    }
+
+    function setupProductForms() {
+      products.forEach(product => {
+        const form = document.getElementById(`form-${product.id}`);
+        const paypalContainer = document.getElementById(`paypal-${product.id}`);
+
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const name = document.getElementById(`name-${product.id}`).value.trim();
+          const email = document.getElementById(`email-${product.id}`).value.trim();
+          const address = document.getElementById(`address-${product.id}`).value.trim();
+          const city = document.getElementById(`city-${product.id}`).value.trim();
+          const postal = document.getElementById(`postal-${product.id}`).value.trim();
+          const country = document.getElementById(`country-${product.id}`).value.trim();
+
+          let size = null;
+          const sizeElem = document.getElementById(`size-${product.id}`);
+          if (sizeElem) {
+            size = sizeElem.value;
+            if (!size) {
+              alert('Please select a size.');
+              return;
+            }
+          }
+
+          let color = null;
+          const colorElem = document.getElementById(`color-${product.id}`);
+          if (colorElem) {
+            color = colorElem.value;
+            if (!color) {
+              alert('Please select a color.');
+              return;
+            }
+          }
+
+          let iphoneModel = null;
+          const iphoneModelElem = document.getElementById(`iphonemodel-${product.id}`);
+          if (iphoneModelElem) {
+            iphoneModel = iphoneModelElem.value;
+            if (!iphoneModel) {
+              alert('Please select an iPhone model.');
+              return;
+            }
+          }
+
+          const buyerData = { name, email, address, city, postal, country, size, color, iphoneModel };
+
+          // Disable form and show PayPal button
+          form.style.display = 'none';
+          paypalContainer.style.display = 'block';
+
+          renderPayPalButton(`#paypal-${product.id}`, product, buyerData);
+        });
+      });
+    }
+
+    function init() {
+      const container = document.getElementById('product-list');
+      container.innerHTML = products.map(createProductHTML).join('');
+      setupProductForms();
+    }
+
+    window.onload = init;
+  </script>
+
+</body>
+</html>
